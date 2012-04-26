@@ -7,31 +7,30 @@ package network;
  * @author Samuel Croset
  *
  */
-public abstract class Attribute {
-    
-    private String name;
-    private String value;
-    private String type;
-    
-    
-    public String getName() {
-        return name;
+public class Attribute<T>{
+
+    private String header;
+    private T value;
+
+    public Attribute(String header) {
+	this.header = header;
     }
-    public void setName(String name) {
-        this.name = name;
+
+    public void setHeader(String header) {
+	this.header = header;
     }
-    public String getValue() {
-        return value;
+
+    public String getHeader() {
+	return header;
     }
-    public void setValue(String value) {
-        this.value = value;
+
+    public void setValue(T value) {
+	this.value = value;
     }
-    public String getType() {
-        return type;
+
+    public T getValue() {
+	return value;
     }
-    public void setType(String type) {
-        this.type = type;
-    }
-    
+
 
 }
