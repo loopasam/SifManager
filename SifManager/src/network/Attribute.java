@@ -7,7 +7,7 @@ package network;
  * @author Samuel Croset
  *
  */
-public class Attribute {
+public abstract class Attribute {
     
     private String name;
     private String value;

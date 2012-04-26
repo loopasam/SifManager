@@ -12,5 +12,4 @@ import java.util.ArrayList;
 public class Node {
     
     private ArrayList<Attribute> nodeAttributes;
-
 }
