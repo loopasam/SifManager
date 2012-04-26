@@ -11,7 +11,9 @@ public class Attribute<T>{
 
     private String header;
     private T value;
-
+    private String typeString;
+    
+    
     public Attribute(String header) {
 	this.header = header;
     }
@@ -24,13 +26,22 @@ public class Attribute<T>{
 	return header;
     }
 
+    public void setTypeString(String typeString) {
+	this.typeString = typeString;
+    }
+
+    public String getTypeString() {
+	return typeString;
+    }
+
     public void setValue(T value) {
 	this.value = value;
+	this.setTypeString(value.getClass().toString());
     }
 
     public T getValue() {
 	return value;
     }
-
+    
 
 }

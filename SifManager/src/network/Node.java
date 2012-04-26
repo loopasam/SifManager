@@ -13,6 +13,16 @@ import java.util.ArrayList;
 public class Node {
 
     private ArrayList<Attribute<? extends Object>> attributes;
+    
+    
+
+    public ArrayList<Attribute<? extends Object>> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(ArrayList<Attribute<? extends Object>> attributes) {
+        this.attributes = attributes;
+    }
 
     public Node() {
 	this.attributes = new ArrayList<Attribute<? extends Object>>();
@@ -33,6 +43,21 @@ public class Node {
 	}
 	return null;
     }
+
+    /**
+     * @param attribute
+     * @return
+     */
+    public String getAttributeType(Attribute<?> attributeToFind) {
+	String attributeHeader = attributeToFind.getHeader();
+	for (Attribute<? extends Object> attribute : this.attributes) {
+	    if(attribute.getHeader().equals(attributeHeader)){
+		return attribute.getTypeString();
+	    }
+	}
+	return null;
+    }
+
 
 
 }

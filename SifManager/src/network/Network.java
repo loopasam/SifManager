@@ -17,8 +17,16 @@ public class Network {
     private ArrayList<Relation> relations;
     private Attribute<?> nodesLabel;
     private Attribute<?> edgesLabel;
+    private ArrayList<Attribute<?>> attributes;
 
 
+    public void setAttributes(ArrayList<Attribute<?>> attributes) {
+	this.attributes = attributes;
+    }
+
+    public ArrayList<Attribute<?>> getAttributes() {
+	return attributes;
+    }
 
     public void setEdgesLabel(Attribute<?> edgesLabel) {
 	this.edgesLabel = edgesLabel;
@@ -38,6 +46,7 @@ public class Network {
 
     public Network() {
 	this.relations = new ArrayList<Relation>();
+	this.attributes = new ArrayList<Attribute<?>>();
     }
 
     public void setRelations(ArrayList<Relation> relations) {
@@ -64,13 +73,52 @@ public class Network {
 	    if(this.nodesLabel == null || this.edgesLabel == null){
 		System.err.println("no identifier defined!");
 	    }else{
-		String subject = relation.getSubject().getAttributeValue(this.nodesLabel);
-		String edge = relation.getEdge().getAttributeValue(this.edgesLabel);
-		String object = relation.getObject().getAttributeValue(this.nodesLabel);
-		networkFile.append(subject + " " + edge + " " + object + "\n");
+		String subjectString = relation.getSubject().getAttributeValue(this.nodesLabel);		
+		String edgeString = relation.getEdge().getAttributeValue(this.edgesLabel);
+		String objectString = relation.getObject().getAttributeValue(this.nodesLabel);
+		networkFile.append(subjectString + " " + edgeString + " " + objectString + "\n");
 	    }
 	}
+	
 	writeFile(path, fileName, networkFile, "sif");
+
+	for (Attribute<?> attribute : this.getAttributes()) {
+	    ArrayList<String> visitedNode = new ArrayList<String>();
+	    System.out.println(attribute.getHeader());
+	    
+	    for (Relation relation : this.getRelations()) {
+
+		Node subject = relation.getSubject();
+		String subjectString = relation.getSubject().getAttributeValue(this.nodesLabel);		
+		if(subject.getAttributeValue(attribute) != null 
+			&& !visitedNode.contains(subjectString)){
+		    
+		    System.out.println("type: " + subject.getAttributeType(attribute));
+		    System.out.println(subjectString + " = " + subject.getAttributeValue(attribute));
+		    visitedNode.add(subjectString);
+		}
+
+		Node object = relation.getObject();
+		String objectString = relation.getObject().getAttributeValue(this.nodesLabel);		
+		if(object.getAttributeValue(attribute) != null 
+			&& !visitedNode.contains(objectString)){
+		    System.out.println(objectString + " = " + object.getAttributeValue(attribute));
+		    visitedNode.add(objectString);
+		}
+
+		Edge edge = relation.getEdge();
+		String edgeString = relation.getEdge().getAttributeValue(this.edgesLabel);
+		if(edge.getAttributeValue(attribute) != null){
+
+		    String subjectStringEdge = relation.getSubject().getAttributeValue(this.nodesLabel);		
+		    String objectStringEdge = relation.getObject().getAttributeValue(this.nodesLabel);		
+
+		    System.out.println(subjectStringEdge + " "
+			    + edgeString + " " + objectStringEdge +" = " 
+			    + edge.getAttributeValue(attribute));
+		}
+	    }
+	}
 
     }
 
@@ -114,6 +162,18 @@ public class Network {
      */
     public <T> void setEdgeLabel(Attribute<T> attribute) {
 	this.setEdgesLabel(attribute);
+    }
+
+    /**
+     * @param <T>
+     * @param string
+     * @return
+     */
+    public <T> Attribute<T> getNewAttribute(String header) {
+	// TODO check uniqueness of name
+	Attribute<T> attribute = new Attribute<T>(header);
+	this.getAttributes().add(attribute);
+	return attribute;
     }
 
 
