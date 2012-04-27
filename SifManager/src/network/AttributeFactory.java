@@ -7,7 +7,7 @@ package network;
  * @author Samuel Croset
  *
  */
-public abstract class Attribute {
+public class AttributeFactory {
     
     private String header;
 
@@ -18,9 +18,5 @@ public abstract class Attribute {
     public String getHeader() {
 	return header;
     }
-    
-    public abstract void setValue(Object value);
-    
-    public abstract Object getValue();
 
 }

@@ -4,31 +4,41 @@
 package network;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Samuel Croset
  *
  */
 public class Edge {
-    
-    private ArrayList<Attribute<? extends Object>> attributes;
-    
-    public Edge() {
-	this.attributes = new ArrayList<Attribute<? extends Object>>();
+
+    private HashMap<String, Attribute> attributes;
+
+    void setAttributes(HashMap<String, Attribute> attributes) {
+	this.attributes = attributes;
     }
 
-    public <T> void addAttributeValue(Attribute<T> stringAttribute, T value) {
-	Attribute<T> newAttribute = new Attribute<T>(stringAttribute.getHeader());
-	newAttribute.setValue(value);
-	attributes.add(newAttribute);
+    public HashMap<String, Attribute> getAttributes() {
+	return attributes;
     }
-    
-    public <T> String getAttributeValue(Attribute<T> attributeToFind){
-	String attributeHeader = attributeToFind.getHeader();
-	for (Attribute<? extends Object> attribute : this.attributes) {
-	    if(attribute.getHeader().equals(attributeHeader)){
-		return attribute.getValue().toString();
-	    }
+
+
+    public Edge() {
+	this.setAttributes(new HashMap<String, Attribute>());
+    }
+
+
+    public void addAttribute(Attribute attribute) {
+	this.getAttributes().put(attribute.getHeader(), attribute);
+    }
+
+    /**
+     * @param identifierEdges
+     * @return
+     */
+    public Attribute getAttribute(String identifierEdges) {
+	if(this.getAttributes().get(identifierEdges) != null){
+	    return this.getAttributes().get(identifierEdges);
 	}
 	return null;
     }

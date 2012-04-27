@@ -3,7 +3,7 @@
  */
 package network;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -12,52 +12,35 @@ import java.util.ArrayList;
  */
 public class Node {
 
-    private ArrayList<Attribute<? extends Object>> attributes;
-    
-    
+    private HashMap<String, Attribute> attributes;
 
-    public ArrayList<Attribute<? extends Object>> getAttributes() {
-        return attributes;
+    void setAttributes(HashMap<String, Attribute> attributes) {
+	this.attributes = attributes;
     }
 
-    public void setAttributes(ArrayList<Attribute<? extends Object>> attributes) {
-        this.attributes = attributes;
+    public HashMap<String, Attribute> getAttributes() {
+	return attributes;
     }
+
 
     public Node() {
-	this.attributes = new ArrayList<Attribute<? extends Object>>();
+	this.setAttributes(new HashMap<String, Attribute>());
     }
 
-    public <T> void addAttributeValue(Attribute<T> attribute, T value) {
-	Attribute<T> newAttribute = new Attribute<T>(attribute.getHeader());
-	newAttribute.setValue(value);
-	attributes.add(newAttribute);
-    }
 
-    public <T> String getAttributeValue(Attribute<T> attributeToFind){
-	String attributeHeader = attributeToFind.getHeader();
-	for (Attribute<? extends Object> attribute : this.attributes) {
-	    if(attribute.getHeader().equals(attributeHeader)){
-		return attribute.getValue().toString();
-	    }
-	}
-	return null;
+    public void addAttribute(Attribute attribute) {
+	this.getAttributes().put(attribute.getHeader(), attribute);
     }
 
     /**
-     * @param attribute
+     * @param identifierNodes
      * @return
      */
-    public String getAttributeType(Attribute<?> attributeToFind) {
-	String attributeHeader = attributeToFind.getHeader();
-	for (Attribute<? extends Object> attribute : this.attributes) {
-	    if(attribute.getHeader().equals(attributeHeader)){
-		return attribute.getTypeString();
-	    }
+    public Attribute getAttribute(String identifierNodes) {
+	if(this.getAttributes().get(identifierNodes) != null){
+	    return this.getAttributes().get(identifierNodes);
 	}
 	return null;
     }
-
-
 
 }
