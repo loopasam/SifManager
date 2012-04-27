@@ -26,7 +26,7 @@ public class Example1 {
 	
 	StringAttributeFactory typeFactory = network.getNewStringAttributeFactory("type");
 	StringAttributeFactory nameFactory = network.getNewStringAttributeFactory("name");
-	StringAttributeFactory relationTypeFactory = network.getNewStringAttributeFactory("relationStrength");
+	StringAttributeFactory relationStrengthFactory = network.getNewStringAttributeFactory("relationStrength");
 	IntegerAttributeFactory relationWeightFactory = network.getNewIntegerAttributeFactory("weight");
 	
 	
@@ -47,7 +47,7 @@ public class Example1 {
 	diseaseA.addAttribute(diseaseType);
 	
 	Edge edgeA = new Edge();
-	Attribute edgeAStrength = relationTypeFactory.getNewAttribute("weak action");
+	Attribute edgeAStrength = relationStrengthFactory.getNewAttribute("weak action");
 	Attribute edgeAWeight = relationWeightFactory.getNewAttribute(12);
 	edgeA.addAttribute(edgeAStrength);
 	edgeA.addAttribute(edgeAWeight);
@@ -66,7 +66,7 @@ public class Example1 {
 	diseaseB.addAttribute(diseaseType);
 	
 	Edge edgeB = new Edge();
-	Attribute edgeBStrength = relationTypeFactory.getNewAttribute("strong action");
+	Attribute edgeBStrength = relationStrengthFactory.getNewAttribute("strong action");
 	Attribute edgeBWeight = relationWeightFactory.getNewAttribute(25);
 	edgeB.addAttribute(edgeBWeight);
 	edgeB.addAttribute(edgeBStrength);

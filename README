@@ -1,0 +1,20 @@
+ ____  _  __ __  __                                   
+/ ___|(_)/ _|  \/  | __ _ _ __   __ _  __ _  ___ _ __ 
+\___ \| | |_| |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__|
+ ___) | |  _| |  | | (_| | | | | (_| | (_| |  __/ |   
+|____/|_|_| |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
+                                      |___/           
+
+
+SifManager is a Java library to create Simple Interaction Files (SIF) which can later be imported into Cytoscape.
+
+The library assists you in creating and visualising graph structures. The library handles attributes, in order to display as many dimension as wanted.
+
+
+Infos:
+
+Author: Samuel Croset - http://www.samuelcroset.com
+Version: 1.0
+Version date: April 2012
+
+Documentation: https://github.com/loopasam/SifManager/wiki
