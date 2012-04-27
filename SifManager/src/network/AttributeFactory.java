@@ -7,7 +7,7 @@ package network;
  * @author Samuel Croset
  *
  */
-public class AttributeFactory {
+public abstract class AttributeFactory {
     
     private String header;
 
@@ -18,5 +18,10 @@ public class AttributeFactory {
     public String getHeader() {
 	return header;
     }
+
+    /**
+     * @return
+     */
+    public abstract String getAttributeTypeInString();
 
 }

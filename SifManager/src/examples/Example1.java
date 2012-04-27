@@ -4,8 +4,11 @@
 package examples;
 
 
+import java.io.IOException;
+
 import network.Attribute;
 import network.Edge;
+import network.IntegerAttributeFactory;
 import network.Network;
 import network.Node;
 import network.Relation;
@@ -20,39 +23,62 @@ public class Example1 {
     public static void main(String[] args) {
 
 	Network network = new Network();
-
-	StringAttributeFactory countryFactory = network.getNewStringAttributeFactory("country");
-	StringAttributeFactory relationTypeFactory = network.getNewStringAttributeFactory("relationType");
+	
+	StringAttributeFactory typeFactory = network.getNewStringAttributeFactory("type");
 	StringAttributeFactory nameFactory = network.getNewStringAttributeFactory("name");
+	StringAttributeFactory relationTypeFactory = network.getNewStringAttributeFactory("relationStrength");
+	IntegerAttributeFactory relationWeightFactory = network.getNewIntegerAttributeFactory("weight");
 	
 	
-	network.setIdentifierNodes("country");
-	network.setIdentifierEdges("relationType");
-
-	Attribute franceAttribute = countryFactory.getNewAttribute("France");
-	Node node1 = new Node();
-	node1.addAttribute(franceAttribute);
-	Attribute pierreattribute = nameFactory.getNewAttribute("Pierre");
-	node1.addAttribute(pierreattribute);
-
-	Node node2 = new Node();
-	Attribute germanyAttribute = countryFactory.getNewAttribute("Germany");
-	node2.addAttribute(germanyAttribute);
-	Attribute paulAttribute = nameFactory.getNewAttribute("Paul");
-	node2.addAttribute(paulAttribute);
-
-	Edge edge1 = new Edge();
-	Attribute nextAttribute = relationTypeFactory.getNewAttribute("next_to");
-	edge1.addAttribute(nextAttribute);
+	network.setIdentifierNodes("name");
+	network.setIdentifierEdges("relationStrength");
 	
-	Relation relation = new Relation(node1, edge1, node2);
+	Attribute drugType = typeFactory.getNewAttribute("Drug");
+	Attribute diseaseType = typeFactory.getNewAttribute("Disease");
 	
-	network.addRelation(relation);
+	Node drugA = new Node();
+	Attribute drugAname = nameFactory.getNewAttribute("sildenafil");
+	drugA.addAttribute(drugAname);
+	drugA.addAttribute(drugType);
 	
-	network.saveAll();
+	Node diseaseA = new Node();
+	Attribute diseaseName = nameFactory.getNewAttribute("cancer");
+	diseaseA.addAttribute(diseaseName);
+	diseaseA.addAttribute(diseaseType);
+	
+	Edge edgeA = new Edge();
+	Attribute edgeAStrength = relationTypeFactory.getNewAttribute("weak action");
+	Attribute edgeAWeight = relationWeightFactory.getNewAttribute(12);
+	edgeA.addAttribute(edgeAStrength);
+	edgeA.addAttribute(edgeAWeight);
+	
+	Relation relationA = new Relation(drugA, edgeA, diseaseA);
+	network.addRelation(relationA);
+	
+	Node drugB = new Node();
+	Attribute drugBname = nameFactory.getNewAttribute("sildenafil");
+	drugB.addAttribute(drugBname);
+	drugB.addAttribute(drugType);
+	
+	Node diseaseB = new Node();
+	Attribute diseaseBName = nameFactory.getNewAttribute("erectile dysfuntion");
+	diseaseB.addAttribute(diseaseBName);
+	diseaseB.addAttribute(diseaseType);
+	
+	Edge edgeB = new Edge();
+	Attribute edgeBStrength = relationTypeFactory.getNewAttribute("strong action");
+	Attribute edgeBWeight = relationWeightFactory.getNewAttribute(25);
+	edgeB.addAttribute(edgeBWeight);
+	edgeB.addAttribute(edgeBStrength);
+	
+	Relation relationB = new Relation(drugB, edgeB, diseaseB);
+	network.addRelation(relationB);
 
-
-//	network.save("dev_data", "demo");
+	try {
+	    network.saveAll("dev_data", "demo");
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
 
     }
 

@@ -7,16 +7,16 @@ package network;
  * @author Samuel Croset
  *
  */
-public class StringAttributeFactory extends AttributeFactory {
+public class IntegerAttributeFactory extends AttributeFactory {
     
 
-    public StringAttributeFactory(String header) {
+    public IntegerAttributeFactory(String header) {
 	this.setHeader(header);
     }
 
-    public Attribute getNewAttribute(String value) {
+    public Attribute getNewAttribute(Integer value) {
 
-	StringAttribute attribute = new StringAttribute(this.getHeader());
+	IntegerAttribute attribute = new IntegerAttribute(this.getHeader());
 	attribute.setValue(value); 
 	return attribute;
     }
@@ -26,7 +26,7 @@ public class StringAttributeFactory extends AttributeFactory {
      */
     @Override
     public String getAttributeTypeInString() {
-	return "(class=java.lang.String)";
+	return "(class=java.lang.Integer)";
     }
 
 }

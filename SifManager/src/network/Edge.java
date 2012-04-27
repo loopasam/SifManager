@@ -3,7 +3,6 @@
  */
 package network;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -39,6 +38,24 @@ public class Edge {
     public Attribute getAttribute(String identifierEdges) {
 	if(this.getAttributes().get(identifierEdges) != null){
 	    return this.getAttributes().get(identifierEdges);
+	}
+	return null;
+    }
+
+    /**
+     * @param identifierNodes
+     * @return
+     */
+    public String getAttributeValue(String header) {
+
+	if(this.getAttributes().get(header) == null){
+	    try {
+		throw new AttributeException("The edge " + this.toString() + " has no value for the attribute \"" + header + "\". Make sure all your nodes have a value for this attribute.");
+	    } catch (AttributeException e) {
+		e.printStackTrace();
+	    }
+	}else{
+	    return this.getAttributes().get(header).getValue().toString();
 	}
 	return null;
     }
