@@ -123,9 +123,9 @@ public class Network {
 
 	StringBuilder sifFile = new StringBuilder();
 	for (Relation relation : this.getRelations()) {
-	    String subjectString = relation.getSubject().getAttributeValue(this.getIdentifierNodes()).replaceAll(" ", "_");
-	    String edgeString = relation.getEdge().getAttributeValue(this.getIdentifierEdges()).replaceAll(" ", "_");
-	    String objectString = relation.getObject().getAttributeValue(this.getIdentifierNodes()).replaceAll(" ", "_");
+	    String subjectString = relation.getSubject().getCleanedAttributeValue(this.getIdentifierNodes());
+	    String edgeString = relation.getEdge().getCleanedAttributeValue(this.getIdentifierEdges());
+	    String objectString = relation.getObject().getCleanedAttributeValue(this.getIdentifierNodes());
 
 	    sifFile.append(subjectString + " " + edgeString + " " + objectString + "\n");
 
@@ -145,7 +145,7 @@ public class Network {
 
 		if(relation.getSubject().getAttribute(header) != null){
 		    String subjectValue = relation.getSubject().getAttributeValue(header);
-		    String subjectString = relation.getSubject().getAttributeValue(this.getIdentifierNodes()).replaceAll(" ", "_");
+		    String subjectString = relation.getSubject().getCleanedAttributeValue(this.getIdentifierNodes());
 		    if(!visited.contains(subjectString)){
 			attributeFile.append(subjectString + " = \"" + subjectValue + "\"\n");
 			visited.add(subjectString);
@@ -155,7 +155,7 @@ public class Network {
 
 		if(relation.getObject().getAttribute(header) != null){
 		    String objectValue = relation.getObject().getAttributeValue(header);
-		    String objectString = relation.getObject().getAttributeValue(this.getIdentifierNodes()).replaceAll(" ", "_");
+		    String objectString = relation.getObject().getCleanedAttributeValue(this.getIdentifierNodes());
 		    if(!visited.contains(objectString)){
 			attributeFile.append(objectString + " = \"" + objectValue + "\"\n");
 			visited.add(objectString);
@@ -163,9 +163,9 @@ public class Network {
 		}
 
 		if(relation.getEdge().getAttribute(header) != null){
-		    String subjectString = relation.getSubject().getAttributeValue(this.getIdentifierNodes()).replaceAll(" ", "_");
-		    String objectString = relation.getObject().getAttributeValue(this.getIdentifierNodes()).replaceAll(" ", "_");
-		    String edgeString = relation.getEdge().getAttributeValue(this.getIdentifierEdges()).replaceAll(" ", "_");
+		    String subjectString = relation.getSubject().getCleanedAttributeValue(this.getIdentifierNodes());
+		    String objectString = relation.getObject().getCleanedAttributeValue(this.getIdentifierNodes());
+		    String edgeString = relation.getEdge().getCleanedAttributeValue(this.getIdentifierEdges());
 		    String edgeValue = relation.getEdge().getAttribute(header).getValue().toString();
 		    attributeFile.append(subjectString + " (" + edgeString + ") " + objectString + " = " + edgeValue + "\n");
 		    extension = "ea";

@@ -60,5 +60,23 @@ public class Edge {
 	return null;
     }
 
+    /**
+     * @param identifierEdges
+     * @return
+     */
+    public String getCleanedAttributeValue(String header) {
+
+	if(this.getAttributes().get(header) == null){
+	    try {
+		throw new AttributeException("The edge " + this.toString() + " has no value for the attribute \"" + header + "\". Make sure all your nodes have a value for this attribute.");
+	    } catch (AttributeException e) {
+		e.printStackTrace();
+	    }
+	}else{
+	    return this.getAttributes().get(header).getValue().toString().replaceAll(" ", "_").replaceAll("(", "-").replaceAll(")", "-");
+	}
+	return null;
+    }
+
 
 }
