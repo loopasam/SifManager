@@ -74,7 +74,7 @@ public class Node {
 		e.printStackTrace();
 	    }
 	}else{
-	    return this.getAttributes().get(header).getValue().toString().replaceAll(" ", "_").replaceAll("(", "-").replaceAll(")", "-");
+	    return this.getAttributes().get(header).getValue().toString().replaceAll(" ", "_").replaceAll("\\(", "_").replaceAll("\\)", "_").replaceAll("=", "_");
 	}
 	return null;
     }
