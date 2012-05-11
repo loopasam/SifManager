@@ -140,7 +140,7 @@ public class Network {
 	    StringBuilder attributeFile = new StringBuilder();
 	    attributeFile.append(header + " " + this.getMapAttributes().get(header).getAttributeTypeInString() + "\n");
 	    ArrayList<String> visited = new ArrayList<String>();
-	    String extension = null;
+	    String extension = ".txt";
 
 	    for (Relation relation : this.getRelations()) {
 
