@@ -29,10 +29,11 @@ public class Network {
     }
 
     public void setIdentifierEdges(String identifierEdges) {
-	if(this.getMapAttributes().containsKey(identifierNodes)){
+		
+	if(this.getMapAttributes().containsKey(identifierEdges)){
 	    this.identifierEdges = identifierEdges;
 	}else{
-	    System.err.println("identifier unknown");
+	    System.err.println("There is no identifier: " + identifierEdges);
 	}
     }
 
@@ -44,7 +45,7 @@ public class Network {
 	if(this.getMapAttributes().containsKey(identifierNodes)){
 	    this.identifierNodes = identifierNodes;
 	}else{
-	    System.err.println("identifier unknown");
+	    System.err.println("There is no identifier: " + identifierNodes);
 	}
     }
 
@@ -95,7 +96,7 @@ public class Network {
      * @return
      */
     public StringAttributeFactory getNewStringAttributeFactory(String header) {
-
+	
 	if(this.mapAttributes.containsKey(header)){
 	    try {
 		throw new AttributeException("The attribute \"" + header + "\" is already in use. Try a different attribute header.");
