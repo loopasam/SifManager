@@ -148,7 +148,7 @@ public class Network {
 		    String subjectValue = relation.getSubject().getAttributeValue(header);
 		    String subjectString = relation.getSubject().getCleanedAttributeValue(this.getIdentifierNodes());
 		    if(!visited.contains(subjectString)){
-			attributeFile.append(subjectString + " = \"" + subjectValue + "\"\n");
+			attributeFile.append(subjectString + " = " + subjectValue + "\n");
 			visited.add(subjectString);
 			extension = "na";
 		    }
@@ -158,7 +158,7 @@ public class Network {
 		    String objectValue = relation.getObject().getAttributeValue(header);
 		    String objectString = relation.getObject().getCleanedAttributeValue(this.getIdentifierNodes());
 		    if(!visited.contains(objectString)){
-			attributeFile.append(objectString + " = \"" + objectValue + "\"\n");
+			attributeFile.append(objectString + " = " + objectValue + "\n");
 			visited.add(objectString);
 		    }
 		}
